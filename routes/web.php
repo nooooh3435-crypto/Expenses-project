@@ -48,15 +48,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
     Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::post('/users/{id}/update', [UserController::class, 'update'])->name('users.update');
-    Route::get('/users/{id}/delete', [UserController::class, 'destroy'])->name('users.delete');
+    Route::delete('/users/{id}/delete', [UserController::class, 'destroy'])->name('users.delete');
 });
 
 // Dashboard & Expenses
+Route::middleware('auth')->group(function () {
 Route::get('/dashboard', [ExpenseController::class, 'index'])->name('dashboard')->middleware('auth');
 Route::post('/expenses', [ExpenseController::class, 'storeExpense'])->name('expenses.store');
 Route::put('/expenses/{expense}', [ExpenseController::class, 'update'])->name('expenses.update');
 Route::delete('/expenses/{id}/delete', [ExpenseController::class, 'destroyExpense'])->name('expenses.delete');
-
+});
 // Profile
 Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show')->middleware('auth');
 Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');

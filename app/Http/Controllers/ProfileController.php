@@ -1,18 +1,42 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Profiler\Profile as ProfilerProfile;
 
 class ProfileController extends Controller
 {
    public function show()
-{
+   {
     $user = auth()->user();
-    $profile = $user->profile; // علاقة One-to-One
+    if ($user->profile) {
+        $profile = $user->profile;
+    }else {
+        $profile = null;
+    }
+
     return view('layouts.profile', compact('user', 'profile'));
-}
+   }
+
+
+    public function store(Request $request)
+    {
+        $user = auth()->user();
+        $profile = $user->profile;
+        $data=$request->validate([
+        'Nick_name' => 'nullable|string|max:255',
+        'Occupation' => 'nullable|string|max:255',
+        'Salary' => 'nullable|numeric',
+        'Image' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+        'user_id'=> 'required|exists:user_id'
+
+]);
+    }
+
+
+
 
 public function update(Request $request)
 {
@@ -20,10 +44,11 @@ public function update(Request $request)
     $profile = $user->profile;
 
     $data = $request->validate([
-        'nick_name' => 'nullable|string|max:255',
-        'occupation' => 'nullable|string|max:255',
-        'salary' => 'nullable|numeric',
-        'image' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+        'Nick_name' => 'nullable|string|max:255',
+        'Occupation' => 'nullable|string|max:255',
+        'Salary' => 'nullable|numeric',
+        'Image' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+        'user_id'=> 'required|exists:user_id'
     ]);
 
     if ($request->hasFile('image')) {
@@ -37,60 +62,4 @@ public function update(Request $request)
 
 
 
-
-    /**
-     * Display a listing of the resource.
-     */
-    // public function index()
-    // {
-    //     //
-    // }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    // public function create()
-    // {
-    //     //
-    // }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
-
-    /**
-     * Display the specified resource.
-     */
-    // public function show(Profile $profile)
-    // {
-    //     //
-    // }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    // public function edit(Profile $profile)
-    // {
-    //     //
-    // }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    // public function update(Request $request, Profile $profile)
-    // {
-    //     //
-    // }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    // public function destroy(Profile $profile)
-    // {
-    //     //
-    // }
 }

@@ -12,9 +12,10 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('resources/css/app.css')}}">
 
     <!-- Scripts -->
-    @vite('resources/js/app.js')
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
 </head>
 <body>   
     <div id="app">
@@ -28,27 +29,27 @@
                 </button> -->
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <!-- <ul class="navbar-nav me-auto">
+                    <!-- Left Side Of Navbar
+                    <ul class="navbar-nav me-auto">
 
                     </ul> -->
 
-                    <!-- Right Side Of Navbar -->
-                    <!-- <ul class="navbar-nav ms-auto"> -->
+                    <!-- Right Side Of Navbar
+                    <ul class="navbar-nav ms-auto"> -->
                         <!-- Authentication Links -->
-                        <!-- @guest
+                        @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li> -->
-                            <!-- @endif
+                                </li>
+                            @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
-                            @endif -->
-                        @else
+                            @endif
+                            @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

@@ -1,143 +1,122 @@
+@extends('layouts.app')
+
+@section('content')
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6 col-lg-4">
+
+            <div class="card p-4 shadow-sm form-card">
+
+                <h2 class="text-center mb-4 title">الملف الشخصي</h2>
+
+                <!-- الصورة -->
+                @if($profile && $profile->Image)
+                    <div class="text-center mb-3">
+                        <img src="{{ asset('storage/' . $profile->Image) }}"
+                             style="width:120px; height:120px; border-radius:50%; border:3px solid var(--primaryColor);">
+                    </div>
+                @endif
 
 
+                <!-- اللقب -->
+                <div class="mb-3">
+                    <label class="form-label">اللقب</label>
+                    <input type="text" class="form-control"
+                           value="{{ $profile->Nick_Name ?? 'غير محدد' }}" >
+                </div>
 
+                <!-- الوظيفة -->
+                <div class="mb-3">
+                    <label class="form-label">الوظيفة</label>
+                    <input type="text" class="form-control"
+                           value="{{ $profile->Occupation ?? 'غير محدد' }}" >
+                </div>
 
+                <!-- الراتب -->
+                <div class="mb-3">
+                    <label class="form-label">الراتب</label>
+                    <input type="text" class="form-control"
+                           value="{{ $profile->Salary ?? 'غير محدد' }}" >
+                </div>
 
+                <a href="{{ route('dashboard') }}" class="btn btn-secondary w-100 mt-3">
+                    رجوع للداشبورد
+                </a>
 
-<!-- <!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <title>الملف الشخصي</title>
-  <style>
-    body {
-      font-family: Tahoma, sans-serif;
-      background-color: #171a1c;
-      color: #fff;
-      margin: 0;
-      padding: 20px;
-      direction: rtl;
-    }
-    .profile-box {
-      background: #22282a;
-      padding: 30px;
-      border-radius: 12px;
-      max-width: 600px;
-      margin: auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    }
-    h2 {
-      color: #ff274b;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .profile-img {
-      display: block;
-      margin: auto;
-      border-radius: 50%;
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      border: 3px solid #ff274b;
-    }
-    .info {
-      margin-top: 20px;
-      font-size: 16px;
-    }
-    .info strong {
-      color: #ff274b;
-    }
-    form {
-      margin-top: 20px;
-    }
-    input, button {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border-radius: 6px;
-      border: none;
-    }
-    input {
-      background: #fff;
-      color: #000;
-    }
-    button {
-      background: #ff274b;
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    button:hover {
-      background: #fff;
-      color: #ff274b;
-      transform: scale(1.05);
-    }
-  </style>
-</head>
-<body>
+            </div>
 
-<div class="profile-box">
-  <h2>الملف الشخصي</h2>
+        </div>
+    </div>
 
-  
-  @if($profile->image)
-    <img src="{{ asset('storage/' . $profile->image) }}" alt="Profile Image" class="profile-img">
-  @else
-    <img src="{{ asset('images/default.png') }}" alt="Default Image" class="profile-img">
-  @endif
-
-  
-  <div class="info">
-    <p><strong>الاسم المستعار:</strong> {{ $profile->nick_name }}</p>
-    <p><strong>الوظيفة:</strong> {{ $profile->occupation }}</p>
-    <p><strong>الراتب:</strong> {{ $profile->salary }} ريال</p>
-  </div>
-
-  
-  <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    <input type="text" name="nick_name" value="{{ $profile->nick_name }}" placeholder="الاسم المستعار">
-    <input type="text" name="occupation" value="{{ $profile->occupation }}" placeholder="الوظيفة">
-    <input type="number" name="salary" value="{{ $profile->salary }}" placeholder="الراتب">
-    <input type="file" name="image">
-    <button type="submit">تحديث البيانات</button>
-  </form>
 </div>
 
-</body>
-</html> -->
+@endsection
 
+<style>
+  :root{
+    --primaryColor: #ff274b;
+    --secondaryColor: #f7bcf7;
+    --lightColor: #ffffff;
+    --bgColor-1: #171a1c;
+    --bgColor-2: #22282a;
+}
 
+/* خلفية الصفحة */
+body{
+    background-color: var(--bgColor-1);
+    color: var(--lightColor);
+}
 
+/* صندوق البروفايل */
+.form-card{
+    background-color: var(--bgColor-2);
+    border-radius: 15px;
+}
 
+/* العنوان */
+.title{
+    color: var(--primaryColor);
+    font-size: 40px;
+}
 
+/* الحقول */
+.form-control{
+    border: 2px double var(--primaryColor);
+    border-radius: 30px;
+    height: 50px;
+    padding-left: 20px;
+    background-color: var(--bgColor-1);
+    color: var(--lightColor);
+}
 
+.form-control:focus{
+    background-color: var(--bgColor-1);
+    color: var(--lightColor);
+    border-color: var(--secondaryColor);
+}
 
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <title>الملف الشخصي</title>
-  <style>
-    body { font-family: Tahoma; background-color: #171a1c; color: #fff; padding: 20px; direction: rtl; }
-    .profile-box { background: #22282a; padding: 30px; border-radius: 12px; max-width: 700px; margin: auto; }
-    h2 { color: #ff274b; text-align: center; margin-bottom: 20px; }
-    .profile-img { display: block; margin: auto; border-radius: 50%; width: 120px; height: 120px; object-fit: cover; border: 3px solid #ff274b; }
-    .info { margin-top: 20px; font-size: 16px; }
-    .info strong { color: #ff274b; }
-    input, button { width: 100%; padding: 10px; margin: 8px 0; border-radius: 6px; border: none; }
-    input { background: #fff; color: #000; }
-    button { background: #ff274b; color: #fff; font-weight: bold; cursor: pointer; transition: 0.3s; }
-    button:hover { background: #fff; color: #ff274b; transform: scale(1.05); }
-  </style>
-</head>
-<body>
+/* زر الرجوع */
+.btn-secondary{
+    background-color: var(--bgColor-1);
+    border: 2px solid var(--primaryColor);
+    border-radius: 30px;
+    height: 50px;
+    color: var(--primaryColor);
+}
 
-<div class="profile-box">
-  <h2>الملف الشخصي</h2>
+.btn-secondary:hover{
+    background-color: var(--primaryColor);
+    color: var(--lightColor);
+}
 
-  @if($profile->image)
-    <img src="{{ asset('storage/' . $profile->image) }}" alt="Profile Image" class="profile-img">
-  @else
-    <img src="{{ asset('images/default.png') }}" alt="Default Image" class="profile
+/* صورة البروفايل */
+.profile-image{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid var(--primaryColor);
+    object-fit: cover;
+}
+</style>
