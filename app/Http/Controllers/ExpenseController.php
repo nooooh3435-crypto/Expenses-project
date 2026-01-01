@@ -1,36 +1,5 @@
 <?php
 
-// namespace App\Http\Controllers;
-
-// use Illuminate\Http\Request;
-
-// class ExpenseController extends Controller
-// {
-//     public function show() {
-//         $user = auth()->user();
-//         $profile = $user->profile;
-//         return view('profile', compact('user','profile'));
-//     }
-
-//     public function update(Request $request) {
-//         $profile = auth()->user()->profile;
-
-//         $data = $request->validate([
-//             'Nick_name' => 'nullable|string|max:255',
-//             'Occupation' => 'nullable|string|max:255',
-//             'Salary' => 'nullable|numeric',
-//             'Image' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
-//         ]);
-
-//         if ($request->hasFile('Image')) {
-//             $data['Image'] = $request->file('Image')->store('profiles','public');
-//         }
-
-//         $profile->update($data);
-//         return redirect()->route('profile.show')->with('success','تم تحديث البيانات بنجاح!');
-//     }
-// }
-
 
 namespace App\Http\Controllers;
 

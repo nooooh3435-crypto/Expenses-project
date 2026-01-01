@@ -1,11 +1,100 @@
-@import 'tailwindcss';
+@import "bootstrap";
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    :root{
+    --primaryColor: #ff274b;
+    --secondaryColor: #f7bcf7;
+    --lightColor: #ffffff;
+    --bgColor-1: #171a1c;
+    --bgColor-2: #22282a;
 }
+
+/* خلفية الصفحة */
+body{
+    background-color: var(--bgColor-1);
+    color: var(--lightColor);
+    direction: rtl;
+}
+
+/* كرت الفورم */
+.form-card{
+    background-color: var(--bgColor-2);
+    border-radius: 15px;
+}
+
+.form-label{
+  color: var(--primaryColor);
+}
+
+/* العنوان */
+.title{
+    color: var(--primaryColor);
+    font-size: 40px;
+}
+
+/* الحقول */
+.form-control{
+    border: 2px double var(--primaryColor);
+    border-radius: 30px;
+    height: 50px;
+    padding-left: 20px;
+    background-color: var(--bgColor-1);
+    color: var(--lightColor);
+    width:  100%;
+}
+
+.form-control:focus{
+    background-color: var(--bgColor-1);
+    color: var(--lightColor);
+    border-color: var(--secondaryColor);
+}
+
+/* الأزرار */
+.btn-primary{
+    background-color: var(--primaryColor);
+    border: none;
+    border-radius: 30px;
+    height: 50px;
+}
+
+.btn-primary:hover{
+    background-color: var(--secondaryColor);
+    color: var(--bgColor-1);
+}
+
+/* رابط التسجيل */
+.text-link{
+    color: var(--primaryColor);
+    font-weight: bold;
+}
+
+.text-link:hover{
+    color: var(--secondaryColor);
+}
+
+.auth-logo{
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border-radius:80%;
+    clip-path: path("M 0 40 Q 30 0 60 40 T 120 40 L 120 120 L 0 120 Z");
+}
+
+.auth-logo:hover{
+    transform: translateX(-15px); 
+}
+.welcome-title{
+    color: var(--primaryColor);
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+#email,#pass{
+    background-color: var(--lightColor);
+    color: var(--bgColor-1);
+}
+
+  
+
+
+
