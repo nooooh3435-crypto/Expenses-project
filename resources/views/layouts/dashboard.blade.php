@@ -212,6 +212,44 @@ function closeModal() {
                     </div>
                 @endforeach
             </div>
+
+            <!-- المصاريف اليومية -->
+            <div class="col-12 col-lg-4 mt-4">
+                <div class="card-box p-4">
+                    <h3 class="section-title mb-3">المصاريف اليومية</h3>
+
+                    @forelse($dailyExpenses as $day)
+                        <div class="expense-item mb-2 p-2">
+                            {{ \Carbon\Carbon::parse($day->day)->format('Y-m-d') }}
+                            <br>
+                            <strong>{{ number_format($day->total, 2) }} SR</strong>
+                        </div>
+                    @empty
+                        <p>لا توجد بيانات</p>
+                    @endforelse
+                </div>
+            </div>
+
+
+            <!-- المصاريف الشهرية -->
+            <div class="col-12 col-lg-4 mt-4">
+                <div class="card-box p-4">
+                    <h3 class="section-title mb-3">المصاريف الشهرية</h3>
+
+                    @forelse($monthlyExpenses as $month)
+                        <div class="expense-item mb-2 p-2">
+                            {{ $month->year }} - {{ $month->month }}
+                            <br>
+                            <strong>{{ number_format($month->total, 2) }} SR</strong>
+                        </div>
+                    @empty
+                        <p>لا توجد بيانات</p>
+                    @endforelse
+                </div>
+            </div>
+
+
+
         </div>
 
     </div>

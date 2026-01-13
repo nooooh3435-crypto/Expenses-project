@@ -21,25 +21,25 @@ class ExpenseController extends Controller
         ->get();
 
     // تجميع يومي مع اسم اليوم + التاريخ
-        $dailyExpenses = Expense::selectRaw('DAYNAME(date) as day_name, DATE(date) as day, SUM(amount) as total')
+        $dailyExpenses = Expense::where('user_id',auth()->id())->selectRaw('DAYNAME(date) as day_name, DATE(date) as day, SUM(amount) as total')
             ->groupBy('day_name', 'day')
             ->orderBy('day', 'desc')
             ->get();
 
         // تجميع أسبوعي مع نطاق التاريخ
-        $weeklyExpenses = Expense::selectRaw('YEARWEEK(date, 1) as week, MIN(DATE(date)) as start_date, MAX(DATE(date)) as end_date, SUM(amount) as total')
-            ->groupBy('week')
-            ->orderBy('week', 'desc')
-            ->get();
+        // $weeklyExpenses = Expense::where('user_id',auth()->id())->selectRaw('YEARWEEK(date, 1) as week, MIN(DATE(date)) as start_date, MAX(DATE(date)) as end_date, SUM(amount) as total')
+        //     ->groupBy('week')
+        //     ->orderBy('week', 'desc')
+        //     ->get();
 
         // تجميع شهري
-        $monthlyExpenses = Expense::selectRaw('YEAR(date) as year, MONTH(date) as month, SUM(amount) as total')
+        $monthlyExpenses = Expense::where('user_id',auth()->id())->selectRaw('YEAR(date) as year, MONTH(date) as month, SUM(amount) as total')
             ->groupBy('year', 'month')
             ->orderBy('year', 'desc')
             ->orderBy('month', 'desc')
             ->get();
 
-        return view('layouts.dashboard', compact('user','expenses', 'dailyExpenses', 'weeklyExpenses', 'monthlyExpenses'));
+        return view('layouts.dashboard', compact('user','expenses', 'dailyExpenses', 'monthlyExpenses'));
 
 
 
