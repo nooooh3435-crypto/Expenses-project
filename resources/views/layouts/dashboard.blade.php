@@ -225,7 +225,7 @@ function closeModal() {
                             <strong>{{ number_format($day->total, 2) }} SR</strong>
                         </div>
                     @empty
-                        <p>لا توجد بيانات</p>
+                        <p> لا توجد بيانات</p>
                     @endforelse
                 </div>
             </div>
